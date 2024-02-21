@@ -32,8 +32,9 @@ public class SaleController {
                     product.setStock((short) (product.getStock()-amount));
                     productService.update(product);
                     Sale sale = new Sale();
+
                     sale.setCustomer(customer);
-                    sale.setProduct(product);
+                    sale.setProduct(productService.findById(idProduct));
                     Sale result = saleService.save(sale);
                     return ResponseHandler.generateResponse("Success", HttpStatus.OK, result);
                 }else{
